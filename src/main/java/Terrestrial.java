@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Year;
 
 public class Terrestrial extends Robot implements ResistanceOk{
     private int maxSpeed;
@@ -12,7 +13,7 @@ public class Terrestrial extends Robot implements ResistanceOk{
 
     @Override
     public String getTechnicalDescription() {
-        return getName() +" fabricado por " + getBuilder() + " en " + Integer.toString(getYear()) + ", usa tracción " + tractionType.toString() + " y alcanza hasta " + maxSpeed + " km/h";
+        return getName() +" fabricado por " + getBuilder() + " en " + getYear() + ", usa tracción " + tractionType.toString() + " y alcanza hasta " + maxSpeed + " km/h";
     }
 
     @Override
