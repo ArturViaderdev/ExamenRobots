@@ -60,12 +60,12 @@ public class RobotsTest {
         robotsManager.addRobot(skyDancer);
         List<Robot> evaluable = robotsManager.filterEvaluable();
 
-        boolean ok = false;
+        boolean ok = true;
         for(Robot robot:evaluable)
         {
-            if(robot instanceof Aerial)
+            if(robot instanceof Aquatic)
             {
-                ok = true;
+                ok = false;
                 break;
             }
         }
