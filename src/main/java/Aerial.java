@@ -5,7 +5,7 @@ public class Aerial extends Robot implements ResistanceOk{
     private int altitude;
     private int autonomy;
 
-    public Aerial(String name, String builder, int year, LocalDate registerDate, int altitude, int autonomy) {
+    public Aerial(String name, String builder, Year year, LocalDate registerDate, int altitude, int autonomy) {
         this.altitude = altitude;
         this.autonomy = autonomy;
         super(name, builder, year, registerDate);
@@ -18,7 +18,7 @@ public class Aerial extends Robot implements ResistanceOk{
 
     @Override
     public String getResistanceReport() {
-        if(autonomy>=60)
+        if(isOkForCompetition())
         {
             return "Autonomía de " + autonomy + " minutos. Apto para la competición.";
         }
@@ -26,5 +26,10 @@ public class Aerial extends Robot implements ResistanceOk{
         {
             return "Autonomía de " + autonomy + " minutos. No apto para la competición.";
         }
+    }
+
+    @Override
+    public boolean isOkForCompetition() {
+        return autonomy>=60;
     }
 }

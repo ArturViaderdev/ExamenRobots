@@ -5,7 +5,7 @@ public class Aquatic extends Robot{
     private int depth;
     private Propulsion propulsion;
 
-    public Aquatic(String name, String builder, int year, LocalDate registerDate, int depth, Propulsion propulsion) {
+    public Aquatic(String name, String builder, Year year, LocalDate registerDate, int depth, Propulsion propulsion) {
         this.depth = depth;
         this.propulsion = propulsion;
         super(name, builder, year, registerDate);

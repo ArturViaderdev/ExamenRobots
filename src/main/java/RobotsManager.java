@@ -13,20 +13,24 @@ public class RobotsManager {
         robots.add(robot);
     }
 
-    public void listAllRobots()
+    public List<String> listAllRobots()
     {
+        List<String> descriptions = new ArrayList<>();
         for(Robot robot:robots)
         {
-            System.out.println(robot.getTechnicalDescription());
+            descriptions.add(robot.getTechnicalDescription());
         }
+        return descriptions;
     }
 
-    public void listListOfRobots(List<Robot> robotsList)
+    public List<String> listListOfRobots(List<Robot> robotsList)
     {
+        List<String> descriptions = new ArrayList<>();
         for(Robot robot:robotsList)
         {
-            System.out.println(robot.getTechnicalDescription());
+            descriptions.add(robot.getTechnicalDescription());
         }
+        return descriptions;
     }
 
     public List<Robot> searchRobotByBuilder(String builder)
@@ -40,7 +44,7 @@ public class RobotsManager {
         List<Robot> filtered = new ArrayList<>();
         for(Robot robot:robots)
         {
-            if(robot instanceof Terrestrial || robot instanceof Aerial)
+            if(robot instanceof ResistanceOk)
             {
                 filtered.add(robot);
             }
@@ -48,40 +52,35 @@ public class RobotsManager {
         return filtered;
     }
 
-    private void printEvaluable(List<Robot> filteredRobots)
+    public List<String> printEvaluable(List<Robot> filteredRobots)
     {
+        List<String> resistances = new ArrayList<>();
         for(Robot robot:filteredRobots)
         {
             if(robot instanceof Terrestrial)
             {
-                System.out.println(((Terrestrial) robot).getResistanceReport());
+                resistances.add(((Terrestrial) robot).getResistanceReport());
             }
             else if(robot instanceof Aerial)
             {
-                System.out.println(((Aerial) robot).getResistanceReport());
+                resistances.add(((Aerial) robot).getResistanceReport());
             }
         }
+        return resistances;
     }
 
     public List<Terrestrial> findRobotsSpeed(int speed)
     {
-        List<Terrestrial> filtered = new ArrayList<>();
-        for(Robot robot:robots)
-        {
-            if(robot instanceof Terrestrial)
-            {
-                filtered.add((Terrestrial) robot);
-            }
-        }
-        List<Terrestrial> faster = filtered.stream().filter(o->o.getMaxSpeed()>speed).toList();
-        return faster;
+        return robots.stream().filter(o->o instanceof Terrestrial).map(o->(Terrestrial) o).filter(o->((Terrestrial) o).getMaxSpeed()>speed).toList();
     }
 
-    public void showTerrestrial(List<Terrestrial> faster)
+    public List<String> showTerrestrial(List<Terrestrial> faster)
     {
+        List<String> descriptions = new ArrayList<>();
         for(Robot robot:faster)
         {
-            System.out.println(robot.getTechnicalDescription());
+            descriptions.add(robot.getTechnicalDescription());
         }
+        return descriptions;
     }
 }

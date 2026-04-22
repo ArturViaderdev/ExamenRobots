@@ -4,12 +4,12 @@ import java.time.Year;
 public abstract class Robot {
     private String name;
     private String builder;
-    private int year;
+    private Year year;
     private LocalDate registerDate;
 
     abstract String getTechnicalDescription();
 
-    public Robot(String name, String builder,int year, LocalDate registerDate)
+    public Robot(String name, String builder,Year year, LocalDate registerDate)
     {
         if(name.isEmpty())
         {
@@ -29,7 +29,7 @@ public abstract class Robot {
         return builder;
     }
 
-    public int getYear() {
+    public Year getYear() {
         return year;
     }
 

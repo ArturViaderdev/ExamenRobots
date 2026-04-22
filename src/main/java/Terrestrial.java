@@ -5,7 +5,7 @@ public class Terrestrial extends Robot implements ResistanceOk{
     private int maxSpeed;
     private Traction tractionType;
 
-    public Terrestrial(String name, String builder, int year, LocalDate registerDate, int maxSpeed, Traction tractionType) {
+    public Terrestrial(String name, String builder, Year year, LocalDate registerDate, int maxSpeed, Traction tractionType) {
         this.maxSpeed = maxSpeed;
         this.tractionType = tractionType;
         super(name, builder, year, registerDate);
@@ -18,7 +18,7 @@ public class Terrestrial extends Robot implements ResistanceOk{
 
     @Override
     public String getResistanceReport() {
-        if(tractionType.equals(Traction.ORUGAS))
+        if(isOkForCompetition())
         {
             return("Tracción ORUGAS confirmada. Apto para la competición.");
         }
@@ -26,6 +26,11 @@ public class Terrestrial extends Robot implements ResistanceOk{
         {
             return("No es tracción orugas. No apto para la competición.");
         }
+    }
+
+    @Override
+    public boolean isOkForCompetition() {
+        return tractionType == Traction.ORUGAS;
     }
 
     public int getMaxSpeed() {
