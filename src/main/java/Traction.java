@@ -1,4 +1,4 @@
-package PACKAGE_NAME;
-
 public enum Traction {
+    ORUGAS,
+    RUEDAS
 }
