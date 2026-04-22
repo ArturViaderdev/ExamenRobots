@@ -11,6 +11,10 @@ public abstract class Robot {
 
     public Robot(String name, String builder,int year, LocalDate registerDate)
     {
+        if(name.isEmpty())
+        {
+            throw new EmptyFieldException();
+        }
         this.name = name;
         this.builder = builder;
         this.year = year;
