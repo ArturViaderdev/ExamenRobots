@@ -7,7 +7,6 @@ public abstract class Robot {
     private LocalDate registerDate;
 
     abstract String getTechnicalDescription();
-    abstract String getResistanceReport();
 
     public Robot(String name, String builder,int year, LocalDate registerDate)
     {

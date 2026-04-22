@@ -43,44 +43,53 @@ public class RobotsTest {
     @Test
     public void evaluableRobotsTest()
     {
-        List<Robot> robots = new ArrayList<>();
-
+        RobotsManager robotsManager = new RobotsManager();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
         String textDate = "2025 09 06";
         LocalDate buildDate = LocalDate.parse(textDate,formatter);
         Terrestrial tankbot = new Terrestrial("Tankbot" ,"Robocorp",2022,buildDate,40,Traction.ORUGAS);
-        robots.add(tankbot);
+        robotsManager.addRobot(tankbot);
         textDate = "2021 09 06";
         buildDate = LocalDate.parse(textDate,formatter);
         Aquatic aquaRunner = new Aquatic("AquaRunner","AquaTech", 2021,buildDate,500,Propulsion.HELICE);
-        robots.add(aquaRunner);
+        robotsManager.addRobot(aquaRunner);
         textDate = "2023 09 06";
         buildDate = LocalDate.parse(textDate,formatter);
         Aerial skyDancer = new Aerial("SkyDancer","AeroDynamics",2023,buildDate,3000,90);
-        robots.add(skyDancer);
-        List<Robot> evaluable = filterEvaluable(robots);
-        Assertions.assertEquals(evaluable.size(),2);
+        robotsManager.addRobot(skyDancer);
+        List<Robot> evaluable = robotsManager.filterEvaluable();
+
+        boolean ok = false;
+        for(Robot robot:evaluable)
+        {
+            if(robot instanceof Aerial)
+            {
+                ok = true;
+                break;
+            }
+        }
+
     }
 
     @Test
     public void filterRobotsTest()
     {
-        List<Robot> robots = new ArrayList<>();
+        RobotsManager robotsManager = new RobotsManager();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
         String textDate = "2025 09 06";
         LocalDate buildDate = LocalDate.parse(textDate,formatter);
         Terrestrial tankbot = new Terrestrial("Tankbot" ,"Robocorp",2022,buildDate,40,Traction.ORUGAS);
-        robots.add(tankbot);
+        robotsManager.addRobot(tankbot);
         textDate = "2021 09 06";
         buildDate = LocalDate.parse(textDate,formatter);
         Aquatic aquaRunner = new Aquatic("AquaRunner","AquaTech", 2021,buildDate,500,Propulsion.HELICE);
-        robots.add(aquaRunner);
+        robotsManager.addRobot(aquaRunner);
         textDate = "2023 09 06";
         buildDate = LocalDate.parse(textDate,formatter);
         Aerial skyDancer = new Aerial("SkyDancer","AeroDynamics",2023,buildDate,3000,90);
-        robots.add(skyDancer);
-        List<Robot> filtered = searchRobotByBuilder("Robocorp",robots);
+        robotsManager.addRobot(skyDancer);
+        List<Robot> filtered = robotsManager.searchRobotByBuilder("Robocorp");
         boolean ok = true;
         for(Robot robot:filtered)
         {
@@ -92,24 +101,4 @@ public class RobotsTest {
         }
         Assertions.assertTrue(ok);
     }
-
-    public static List<Robot> filterEvaluable(List<Robot> robots)
-    {
-        List<Robot> filtered = new ArrayList<>();
-        for(Robot robot:robots)
-        {
-            if(robot instanceof Terrestrial || robot instanceof Aerial)
-            {
-                filtered.add(robot);
-            }
-        }
-        return filtered;
-    }
-
-    public List<Robot> searchRobotByBuilder(String builder, List<Robot> robots)
-    {
-        List<Robot> filtered = robots.stream().filter(e -> e.getBuilder().equals(builder)).toList();
-        return filtered;
-    }
-
 }

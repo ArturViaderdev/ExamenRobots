@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Terrestrial extends Robot{
+public class Terrestrial extends Robot implements ResistanceOk{
     private int maxSpeed;
     private Traction tractionType;
 
@@ -11,12 +11,12 @@ public class Terrestrial extends Robot{
     }
 
     @Override
-    String getTechnicalDescription() {
+    public String getTechnicalDescription() {
         return getName() +" fabricado por " + getBuilder() + " en " + Integer.toString(getYear()) + ", usa tracción " + tractionType.toString() + " y alcanza hasta " + maxSpeed + " km/h";
     }
 
     @Override
-    String getResistanceReport() {
+    public String getResistanceReport() {
         if(tractionType.equals(Traction.ORUGAS))
         {
             return("Tracción ORUGAS confirmada. Apto para la competición.");
@@ -25,5 +25,9 @@ public class Terrestrial extends Robot{
         {
             return("No es tracción orugas. No apto para la competición.");
         }
+    }
+
+    public int getMaxSpeed() {
+        return maxSpeed;
     }
 }

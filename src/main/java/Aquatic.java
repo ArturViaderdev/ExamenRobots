@@ -11,12 +11,7 @@ public class Aquatic extends Robot{
     }
 
     @Override
-    String getTechnicalDescription() {
+    public String getTechnicalDescription() {
         return getName() + " alcanza una profundidad de " + depth + " con propulsión tipo " + propulsion.toString() + ". Fabricado por " + getBuilder() + " en " + getYear() + ".";
-    }
-
-    @Override
-    String getResistanceReport() {
-        return "Robot acuático. No apto para la competición.";
     }
 }

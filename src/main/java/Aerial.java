@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Aerial extends Robot{
+public class Aerial extends Robot implements ResistanceOk{
     private int altitude;
     private int autonomy;
 
@@ -11,12 +11,12 @@ public class Aerial extends Robot{
     }
 
     @Override
-    String getTechnicalDescription() {
+    public String getTechnicalDescription() {
         return getName() + " vuela hasta " + altitude + "m durante " + autonomy + " minutos. Fabricado en " + getYear() + " por " + getBuilder()+ ".";
     }
 
     @Override
-    String getResistanceReport() {
+    public String getResistanceReport() {
         if(autonomy>=60)
         {
             return "Autonomía de " + autonomy + " minutos. Apto para la competición.";
